@@ -16,6 +16,50 @@ const MapStack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
+function HomeStackScreen({navigation}){
+    return(
+        <HomeStack.Navigator screenOptions={{
+        headerStyle:{
+            backgroundColor: '#ffc600',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold'
+        }
+        }}>
+        <HomeStack.Screen name="Home" component={HomeScreen} options={{
+            headerLeft: () => (
+            <Icon.Button name="ios-menu" size={25}
+            backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
+            </Icon.Button>
+            )
+        }} />
+        </HomeStack.Navigator>
+    );
+};
+  
+function ProfileStackScreen({navigation}){
+    return(
+        <MapStack.Navigator screenOptions={{
+        headerStyle:{
+            backgroundColor: '#ffc600',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold'
+        }
+        }}>
+        <MapStack.Screen name="Profile" component={ProfileScreen} options={{
+        headerLeft: () => (
+            <Icon.Button name="ios-menu" size={25}
+            backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
+            </Icon.Button>
+        )
+        }} />
+        </MapStack.Navigator>
+    );
+};
+
 function MainTabScreen(){
     return (
         <Tab.Navigator
@@ -81,47 +125,3 @@ function MainTabScreen(){
 
 export default MainTabScreen;
 
-function HomeStackScreen({navigation}){
-    return(
-        <HomeStack.Navigator screenOptions={{
-        headerStyle:{
-            backgroundColor: '#ffc600',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold'
-        }
-        }}>
-        <HomeStack.Screen name="Home" component={HomeScreen} options={{
-            headerLeft: () => (
-            <Icon.Button name="ios-menu" size={25}
-            backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
-            </Icon.Button>
-            )
-        }} />
-        </HomeStack.Navigator>
-    );
-};
-  
-function ProfileStackScreen({navigation}){
-    return(
-        <MapStack.Navigator screenOptions={{
-        headerStyle:{
-            backgroundColor: '#ffc600',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold'
-        }
-        }}>
-        <MapStack.Screen name="Profile" component={ProfileScreen} options={{
-        headerLeft: () => (
-            <Icon.Button name="ios-menu" size={25}
-            backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
-            </Icon.Button>
-        )
-        }} />
-        </MapStack.Navigator>
-    );
-};
-  
