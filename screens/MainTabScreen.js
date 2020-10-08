@@ -10,6 +10,8 @@ import MapScreen from './MapScreen';
 import CameraScreen from './CameraScreen';
 import NewsScreen from './NewsScreen';
 import ProfileScreen from './ProfileScreen';
+import SupportScreen from './SupportScreen';
+import { StackActions } from '@react-navigation/native';
 
 const HomeStack = createStackNavigator();
 const MapStack = createStackNavigator();
@@ -20,6 +22,7 @@ function MainTabScreen(){
     return (
         <Tab.Navigator
           initialRouteName="Home"
+          backgroundColor = "fff"
           tabBarOptions={{
             activeTintColor: '#000', 
           }}
@@ -82,6 +85,7 @@ function MainTabScreen(){
 export default MainTabScreen;
 
 function HomeStackScreen({navigation}){
+   
     return(
         <HomeStack.Navigator screenOptions={{
         headerStyle:{
@@ -95,11 +99,19 @@ function HomeStackScreen({navigation}){
         <HomeStack.Screen name="Home" component={HomeScreen} options={{
             headerLeft: () => (
             <Icon.Button name="ios-menu" size={25}
-            backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
+            backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();} 
+            }>
             </Icon.Button>
             )
         }} />
+        <HomeStack.Screen name= "highlight" component ={CameraScreen}/>
+
+     
         </HomeStack.Navigator>
+        
+        
+        
+        
     );
 };
   
