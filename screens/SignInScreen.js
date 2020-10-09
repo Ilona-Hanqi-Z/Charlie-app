@@ -1,21 +1,11 @@
 import React from 'react';
-import { 
-    View, 
-    Text, 
-    Button, 
-    TouchableOpacity,
-    Dimensions,
-    TextInput,
-    Platform,
-    StyleSheet,
-    StatusBar, Alert
-} from 'react-native';
+import { View, Text, TouchableOpacity,TextInput,Platform, StyleSheet,
+        StatusBar, Alert} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {AuthContext} from '../components/context';
-
 import {Users} from '../model/users';
 
 const SignInScreen = ({navigation}) => {
@@ -31,6 +21,7 @@ const SignInScreen = ({navigation}) => {
 
     const { signIn } = React.useContext(AuthContext);
 
+    // username should be longer than 3 character
     const textInputChange = (val) => {
         if(val.trim().length >= 4){
             setData({
@@ -49,6 +40,7 @@ const SignInScreen = ({navigation}) => {
         }
     }
 
+    // password should be longer than 7 character
     const handlePasswordChange = (val) => {
         if(val.trim().length >= 8){
             setData({
@@ -66,6 +58,7 @@ const SignInScreen = ({navigation}) => {
         
     }
 
+    // function when clicking on the eye icon
     const updateSecureTextEntry = () => {
         setData({
             ...data,
@@ -73,6 +66,7 @@ const SignInScreen = ({navigation}) => {
         });
     }
 
+    // determine whether username and password is valid; actually do the sign in
     const loginHandle = (username, password) => {
         const foundUser = Users.filter(item => {
             return username === item.username && password === item.password;
@@ -96,15 +90,20 @@ const SignInScreen = ({navigation}) => {
 
     return(
         <View style={styles.container}>
+            {/* set the design of status bar (device date and time) */}
             <StatusBar backgroundColor="#ffc800" barStyle="light-content"/>
+
+            {/* welcome header */}
             <View style={styles.header}>
                 <Text style={styles.text_header}>Welcome!</Text>
             </View>
 
+            {/* footer */}
             <Animatable.View 
                 animation="fadeInUpBig"
                 style={styles.footer}
             >
+                {/* Username section */}
                 <Text style={styles.text_footer}>Email or @username</Text>
                 <View style={styles.action}>
                     <FontAwesome
@@ -131,13 +130,14 @@ const SignInScreen = ({navigation}) => {
                     </Animatable.View>
                     : null}
                 </View>
-
+                {/* determine whether username length is valid */}
                 {data.isValidUser ? null :
                     <Animatable.View animation="fadeInLeft" duration={500}>
                         <Text style={styles.errorMsg}>Username must be 4 characters long.</Text>
                     </Animatable.View>
                 }  
 
+                {/* password section */}
                 <Text style={[styles.text_footer, {marginTop:35}]}>Password</Text>
                 <View style={styles.action}>
                     <Feather
@@ -171,14 +171,22 @@ const SignInScreen = ({navigation}) => {
                         }
                     </TouchableOpacity>
                 </View>
-
+                {/* determine whether password length is valid */}
                 {data.isValidPassword ? null :
                 <Animatable.View animation="fadeInLeft" duration={500}>
                     <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
                 </Animatable.View>
                 }
 
+               {/* forget password section  */}
+                <TouchableOpacity>
+                     <Text style={{color: 'grey', marginTop:15}}>Forgot password?</Text>
+                </TouchableOpacity>
+                
+                {/* button section */}
                 <View style={styles.button}>
+
+                    {/* log in button */}
                     <TouchableOpacity
                         style={styles.signIn}
                         onPress={() => {loginHandle(data.username, data.password)}}
@@ -193,6 +201,7 @@ const SignInScreen = ({navigation}) => {
                         </LinearGradient>
                     </TouchableOpacity>
 
+                    {/* sign up button */}
                     <TouchableOpacity
                         onPress={() => navigation.navigate("SignUpScreen")}
                         style={[styles.signIn, {
@@ -207,6 +216,7 @@ const SignInScreen = ({navigation}) => {
                     </TouchableOpacity>
                 </View>
 
+                {/* social platform sign in section */}
                 <View style={styles.socialplatform}>
                     <Text style={{color:'grey', fontSize: 16}}>
                         Or, Log In with

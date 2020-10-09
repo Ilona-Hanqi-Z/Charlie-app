@@ -1,3 +1,5 @@
+/* This file contains the gallery page. */
+
 import React from 'react';
 import { Text, View} from 'react-native';
 

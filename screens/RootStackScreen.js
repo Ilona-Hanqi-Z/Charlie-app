@@ -1,3 +1,5 @@
+/*This file contains the stack of the initial splash page, 
+  register page, and sign in page. */
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';

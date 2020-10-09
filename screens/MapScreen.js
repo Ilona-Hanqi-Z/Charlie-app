@@ -1,3 +1,5 @@
+/* This file contains the assignment page. */
+
 import React from 'react';
 import { Text, View } from 'react-native';
 

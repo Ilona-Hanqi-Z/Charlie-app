@@ -1,30 +1,24 @@
+/* This file contains the drawer contents 
+   that will appear on the left 
+   when the user swipes to the right. */
+
 import React from 'react';
 import {View, StyleSheet } from 'react-native';
-import {
-    Avatar,
-    Title,
-    Caption,
-    Paragraph,
-    Drawer,
-    Text,
-    TouchableRipple,
-    Switch
-} from 'react-native-paper';
-import {
-    DrawerContentScrollView,
-    DrawerItem
-}from '@react-navigation/drawer';
+import {Avatar, Title, Caption, Paragraph, Drawer,} from 'react-native-paper';
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import { AuthContext } from '../components/context';
 
 export function DrawerContent(props){
 
     const { signOut } = React.useContext(AuthContext);
+
     return(
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
+
+                    {/* user info section */}
                     <View style={styles.userInfoSection}>
                         <View style={{flexDirection:'row', marginTop:15}}>
                             <Avatar.Image
@@ -48,6 +42,7 @@ export function DrawerContent(props){
                         </View>
                     </View>
 
+                    {/* navigate items section */}
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -87,6 +82,7 @@ export function DrawerContent(props){
                         </DrawerItem>
                     </Drawer.Section>
 
+                    {/* setting and feedback section */}
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -115,6 +111,8 @@ export function DrawerContent(props){
                     </Drawer.Section>
                 </View>
             </DrawerContentScrollView>
+            
+            {/* sign out section */}
             <Drawer.Section style={styles.bottomDrawerSection}>
                 <DrawerItem
                     icon={({ color, size }) => (
