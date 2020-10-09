@@ -1,3 +1,5 @@
+/* This file contains the question and feedback page. */
+
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 

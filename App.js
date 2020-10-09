@@ -15,9 +15,6 @@ const Drawer = createDrawerNavigator();
 
 
 export default function App() {
-  // const [isLoading, setIsLoading] = React.useState(true);
-  // const [userToken, setUserToken] = React.useState(null);
-
   // reducer function
   const initialLoginState = {
     isLoading: true,
@@ -59,13 +56,12 @@ export default function App() {
 
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
 
-  // hardcode username and password; should be grabbed from database
+  // sign in, sign out, sign up
   const authContext = React.useMemo(() => ({
     signIn: async(foundUser) => {
       const userToken = String(foundUser[0].userToken);
       const userName = foundUser[0].username;
       try{
-        userToken = 'dfgdfg';
         await AsyncStorage.setItem('userToken', userToken);
       }catch(e){
         console.log(e);
@@ -82,11 +78,11 @@ export default function App() {
       dispatch( {type: 'LOGOUT'});
     },
     signUp: () => {
-      // setUserToken("fgkj");
-      // setIsLoading(false);
+      // TODO
     },
   }), []);
 
+  // retrieve token
   useEffect(() => {
     setTimeout(async() => {
       let userToken;
@@ -107,6 +103,7 @@ export default function App() {
       </View>
     );
   }
+  
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>

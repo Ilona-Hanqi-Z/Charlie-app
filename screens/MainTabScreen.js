@@ -1,7 +1,9 @@
+/* This file contains the main page that will show up 
+   when a user logs in. */
+
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -11,10 +13,10 @@ import CameraScreen from './CameraScreen';
 import NewsScreen from './NewsScreen';
 import ProfileScreen from './ProfileScreen';
 
+// home, profile, and gallery will have the title tab
 const HomeStack = createStackNavigator();
-const MapStack = createStackNavigator();
-
-const Tab = createBottomTabNavigator();
+const ProfileStack = createStackNavigator();
+const NewsStack = createStackNavigator();
 
 function HomeStackScreen({navigation}){
     return(
@@ -40,7 +42,7 @@ function HomeStackScreen({navigation}){
   
 function ProfileStackScreen({navigation}){
     return(
-        <MapStack.Navigator screenOptions={{
+        <ProfileStack.Navigator screenOptions={{
         headerStyle:{
             backgroundColor: '#ffc600',
         },
@@ -49,16 +51,41 @@ function ProfileStackScreen({navigation}){
             fontWeight: 'bold'
         }
         }}>
-        <MapStack.Screen name="Profile" component={ProfileScreen} options={{
+        <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{
         headerLeft: () => (
             <Icon.Button name="ios-menu" size={25}
             backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
             </Icon.Button>
         )
         }} />
-        </MapStack.Navigator>
+        </ProfileStack.Navigator>
     );
 };
+
+function NewsStackScreen({navigation}){
+    return(
+        <NewsStack.Navigator screenOptions={{
+        headerStyle:{
+            backgroundColor: '#ffc600',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold'
+        }
+        }}>
+        <NewsStack.Screen name="Gallery" component={NewsScreen} options={{
+        headerLeft: () => (
+            <Icon.Button name="ios-menu" size={25}
+            backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
+            </Icon.Button>
+        )
+        }} />
+        </NewsStack.Navigator>
+    );
+};
+
+// bottom tab: home, gallery, camera, assignment, and profile
+const Tab = createBottomTabNavigator();
 
 function MainTabScreen(){
     return (
@@ -80,7 +107,7 @@ function MainTabScreen(){
         />
         <Tab.Screen
         name="News"
-        component={NewsScreen}
+        component={NewsStackScreen}
         options={{
             tabBarLabel: 'News',
             tabBarIcon: ({ color, size }) => (

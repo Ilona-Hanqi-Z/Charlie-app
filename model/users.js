@@ -1,3 +1,6 @@
+/* This file contains some fake users for 
+   testing the validation of login page.*/
+   
 export const Users = [
     {
         id: 1, 
