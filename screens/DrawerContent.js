@@ -8,6 +8,7 @@ import {Avatar, Title, Caption, Paragraph, Drawer,} from 'react-native-paper';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AuthContext } from '../components/context';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export function DrawerContent(props){
 
@@ -15,20 +16,28 @@ export function DrawerContent(props){
 
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
+    const [following, setFollowing] = React.useState("");
+    const [follower, setFollower] = React.useState("");
+    const [avatar, setAvatar] = React.useState("");
+
     React.useEffect(() => {
       const fetchProfile = async () => {
         try{
+          const usertoken = await AsyncStorage.getItem('userToken');
           const response = await fetch('http://localhost:4040/v2/user/me', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Bearer 9qS0G91prA5APk1N8mzLIbXfqB4idhe53PhaoATDz6EnivOpT3ZqKDnLisXqLviajC4ORs0lJus9ph7tibFKZYI7rZsYAl6WXIgx1ycpjhkPBhl9Z9c93joWFS6weP4e'
+            'Authorization': `Bearer ${usertoken}`
           }
         });
           let json = await response.json();
           setUsername(json.username);
           setEmail(json.email);
+          setFollower(json.followed_count);
+          setFollowing(json.following_count);
+          setAvatar(json.avatar);
         }catch(error) {
           console.error(error);
         } 
@@ -44,10 +53,18 @@ export function DrawerContent(props){
                     {/* user info section */}
                     <View style={styles.userInfoSection}>
                         <View style={{flexDirection:'row', marginTop:15}}>
-                            <Avatar.Image
-                                source={require('../assets/avatar.png')}
-                                size={50}
-                            />
+                            {avatar != null ? 
+                              <Avatar.Image
+                                  source={{uri: avatar}}
+                                  size={50}
+                              />
+                              :
+                              <Avatar.Image
+                                  source={require('../assets/avatar.png')}
+                                  size={50}
+                              />
+                            }
+
                             <View style={{marginLeft:15, flexDirection:'column'}}>
                                 <Title style={styles.title}>{username}</Title>
                                 <Caption style={styles.caption}>{email}</Caption>
@@ -55,11 +72,11 @@ export function DrawerContent(props){
                         </View>
                         <View style={styles.row}>
                             <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>302</Paragraph>
+                                <Paragraph style={[styles.paragraph, styles.caption]}>{following}</Paragraph>
                                 <Caption style={styles.caption}>Following</Caption>
                             </View>
                             <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>45844</Paragraph>
+                                <Paragraph style={[styles.paragraph, styles.caption]}>{follower}</Paragraph>
                                 <Caption style={styles.caption}>Follower</Caption>
                             </View>
                         </View>

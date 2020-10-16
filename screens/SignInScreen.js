@@ -70,16 +70,14 @@ const SignInScreen = ({navigation}) => {
 
     // determine whether username and password is valid; actually do the sign in
     const loginHandle = async(username, password) => {
-        // const foundUser = Users.filter(item => {
-        //     return username === item.username && password === item.password;
-        // });
+
         if(username.length === 0 || password.length === 0){
             Alert.alert('Invalid User!', 'Username or password field cannot be empty', [
                 {text:'okay'}
             ]);
             return;
         }
-
+     
         try{
             const response = await fetch('http://localhost:4040/v2/auth/signin', {
                 method: 'POST',
@@ -92,22 +90,21 @@ const SignInScreen = ({navigation}) => {
                     password: password
                 })
             });
-            console.log(response);
-            console.log(response.json);
-            signIn(username, "usertoken");
-        }catch(error){
-            Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-                {text:'okay'}
-            ]);
-            return;
-        }
+            let json = await response.json();
+    
+            if(response.status == 200){
+                signIn(username, json.token);
+            }
 
-        // if(foundUser.length === 0){
-        //     Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-        //         {text:'okay'}
-        //     ]);
-        //     return;
-        // }
+            if(response.status == 401){
+                Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+                    {text:'okay'}
+                ]);
+                return;
+            }
+        }catch(error){
+            console.log(error);
+        }
     }
 
     return(
@@ -126,7 +123,7 @@ const SignInScreen = ({navigation}) => {
                 style={styles.footer}
             >
                 {/* Username section */}
-                <Text style={styles.text_footer}>Email or @username</Text>
+                <Text style={styles.text_footer}>Username</Text>
                 <View style={styles.action}>
                     <FontAwesome
                         name="user-o"
@@ -135,7 +132,7 @@ const SignInScreen = ({navigation}) => {
                         style={{marginTop:5}}
                     />
                     <TextInput
-                        placeholder="Your Email or username"
+                        placeholder="Your username"
                         style={styles.textInput}
                         autoCapitalize="none"
                         onChangeText={(val) => textInputChange(val)}
@@ -201,7 +198,7 @@ const SignInScreen = ({navigation}) => {
                 }
 
                {/* forget password section  */}
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{Alert.alert("not implement yet");}}>
                      <Text style={{color: 'grey', marginTop:15}}>Forgot password?</Text>
                 </TouchableOpacity>
                 

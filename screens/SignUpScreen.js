@@ -31,7 +31,9 @@ const SignUpScreen = ({navigation}) => {
         check_textInputChange: false,
         check_emailInputChange:false,
         secureTextEntry:true,
-        confirm_secureTextEntry:true
+        confirm_secureTextEntry:true,
+        isValidUser: true,
+        isValidPassword:true,
     });
     const { signUp } = React.useContext(AuthContext);
 
@@ -56,17 +58,19 @@ const SignUpScreen = ({navigation}) => {
       });
 
     const textInputChange = (val) => {
-        if(val.length !== 0){
+        if(val.trim().length >= 4){
             setData({
                 ...data,
                 username: val,
-                check_textInputChange: true
+                check_textInputChange: true,
+                isValidUser: true
             });
         }else{
             setData({
                 ...data,
                 username: val,
-                check_textInputChange: false
+                check_textInputChange: false,
+                isValidUser: false
             });
         }
     }
@@ -88,10 +92,19 @@ const SignUpScreen = ({navigation}) => {
     }
 
     const handlePasswordChange = (val) => {
-        setData({
-            ...data,
-            password:val
-        });
+        if(val.trim().length >= 8){
+            setData({
+                ...data,
+                password:val,
+                isValidPassword: true
+            });
+        }else{
+            setData({
+                ...data,
+                password:val,
+                isValidPassword: false
+            });
+        }
     }
 
     const handleConfirmPasswordChange = (val) => {
@@ -132,7 +145,7 @@ const SignUpScreen = ({navigation}) => {
             return;
         }else{
             try{
-                const response = await fetch('http://localhost:4040/v2/user/create', {
+                await fetch('http://localhost:4040/v2/user/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -143,12 +156,25 @@ const SignUpScreen = ({navigation}) => {
                         username: username,
                         password: password
                     })
-                });
-                console.log(response.json);
+                });  
             }catch(error){
                 console.error(error);
             }
-            signUp(username, "usertoken");  
+
+            const response = await fetch('http://localhost:4040/v2/auth/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': 'Bearer G0jz1XRbq5FbjWSWJfBB9MkIi6jphORS5iOpvpdD6fAdawkS7qZwTRPk86BXeM8hfn1l7Qws4u80Gu8Psih6SvuUtGIDuJxZj47Xy4rbaZ98qc6icglknPvkZfG1Ix9X'
+                },
+                body: qs.stringify({
+                    username: username,
+                    password: password
+                })
+            });
+            let json = await response.json();
+            console.log(json.token);
+            signUp(username, json.token);  
         }
         
     }
@@ -217,6 +243,12 @@ const SignUpScreen = ({navigation}) => {
                     </Animatable.View>
                     : null}
                 </View>
+                {/* determine whether username length is valid */}
+                {data.isValidUser ? null :
+                    <Animatable.View animation="fadeInLeft" duration={500}>
+                        <Text style={styles.errorMsg}>Username must be 4 characters long.</Text>
+                    </Animatable.View>
+                }  
 
                 <Text style={[styles.text_footer, {marginTop:20}]}>Password</Text>
                 <View style={styles.action}>
@@ -251,6 +283,12 @@ const SignUpScreen = ({navigation}) => {
                         }
                     </TouchableOpacity>
                 </View>
+                {/* determine whether password length is valid */}
+                {data.isValidPassword ? null :
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                    <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+                </Animatable.View>
+                }
 
                 <Text style={[styles.text_footer, {marginTop:20}]}>
                     Confirm Password

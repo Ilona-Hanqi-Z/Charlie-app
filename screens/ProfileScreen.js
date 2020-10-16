@@ -2,24 +2,37 @@
 
 import React from 'react';
 import { Text, View, StyleSheet, SafeAreaView, Image, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 function ProfileScreen({navigation}) {
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
+    const [avatar, setAvatar] = React.useState("");
+    const [following, setFollowing] = React.useState("");
+    const [follower, setFollower] = React.useState("");
+    const [post, setPost] = React.useState("");
+
     React.useEffect(() => {
       const fetchProfile = async () => {
         try{
+          const usertoken = await AsyncStorage.getItem('userToken');
           const response = await fetch('http://localhost:4040/v2/user/me', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Bearer 9qS0G91prA5APk1N8mzLIbXfqB4idhe53PhaoATDz6EnivOpT3ZqKDnLisXqLviajC4ORs0lJus9ph7tibFKZYI7rZsYAl6WXIgx1ycpjhkPBhl9Z9c93joWFS6weP4e'
+            'Authorization': `Bearer ${usertoken}`
           }
         });
           let json = await response.json();
+
           setUsername(json.username);
           setEmail(json.email);
+          setFollower(json.followed_count);
+          setFollowing(json.following_count);
+          setAvatar(json.avatar);
+          setPost(json.photo_count + json.video_count);
+        
         }catch(error) {
           console.error(error);
         } 
@@ -32,9 +45,16 @@ function ProfileScreen({navigation}) {
           <ScrollView showsVerticalScrollIndicator={false}>
 
               <View style={{ alignSelf: "center", marginTop: 20 }}>
-                  <View style={styles.profileImage}>
-                      <Image source={require("../assets/avatar.png")} style={styles.image} resizeMode="center"></Image>
-                  </View>        
+                {avatar != null ? 
+                    <View style={styles.profileImage}>
+                        <Image source={{uri: avatar}} style={styles.image} resizeMode="center"></Image>
+                    </View>  
+                :
+                    <View style={styles.profileImage}>
+                        <Image source={require("../assets/avatar.png")} style={styles.image} resizeMode="center"></Image>
+                    </View> 
+                }
+                        
               </View>
 
               <View style={styles.infoContainer}>
@@ -44,15 +64,15 @@ function ProfileScreen({navigation}) {
 
               <View style={styles.statsContainer}>
                   <View style={styles.statsBox}>
-                      <Text style={[styles.text, { fontSize: 24 }]}>483</Text>
+                      <Text style={[styles.text, { fontSize: 24 }]}>{post}</Text>
                       <Text style={[styles.text, styles.subText]}>Posts</Text>
                   </View>
                   <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
-                      <Text style={[styles.text, { fontSize: 24 }]}>45,844</Text>
+                      <Text style={[styles.text, { fontSize: 24 }]}>{follower}</Text>
                       <Text style={[styles.text, styles.subText]}>Followers</Text>
                   </View>
                   <View style={styles.statsBox}>
-                      <Text style={[styles.text, { fontSize: 24 }]}>302</Text>
+                      <Text style={[styles.text, { fontSize: 24 }]}>{following}</Text>
                       <Text style={[styles.text, styles.subText]}>Following</Text>
                   </View>
               </View>
