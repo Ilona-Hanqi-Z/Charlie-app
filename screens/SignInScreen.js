@@ -6,7 +6,8 @@ import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {AuthContext} from '../components/context';
-import {Users} from '../model/users';
+
+var qs = require('qs');
 
 const SignInScreen = ({navigation}) => {
 
@@ -67,25 +68,59 @@ const SignInScreen = ({navigation}) => {
     }
 
     // determine whether username and password is valid; actually do the sign in
-    const loginHandle = (username, password) => {
-        const foundUser = Users.filter(item => {
-            return username === item.username && password === item.password;
-        });
-
+    const loginHandle = async(username, password) => {
+        let client_token;
         if(username.length === 0 || password.length === 0){
             Alert.alert('Invalid User!', 'Username or password field cannot be empty', [
                 {text:'okay'}
             ]);
             return;
         }
-
-        if(foundUser.length === 0){
-            Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-                {text:'okay'}
-            ]);
-            return;
+        try{
+            const res = await fetch('http://localhost:4040/v2/auth/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': 'Basic RmdncFprWEtpdXI0enpGV09oa1FKUmNEUXBzZzBnOGpnYmF6TFlOY0NmMlJmU3Vrb1l1dGsyd1NKTEZmOnRJOGE2azFvUnV3aTMyaG96WmZMbG9WbXlFemJwQXZTeFJuYzZlS3lpTFVTcTBlUDYxTkZUMDNXT0Fld1BjS1FFTmF5RTk4NnE2ZTJhakE5N085dnI1UHZuRzltM3dORzZER01rQ05XcHpLdGtEQnVZTDF3Qkw4TE9LN0VESkpXWVhsanp6eGNJNnBhU1VMRXZBdEk2WXZuZVFtbEJPWVNodnpoUjBJTUhsM3JvTU5pM3NLMk1NSUIzRUtEUU0='
+                },
+                body: qs.stringify({
+                    grant_type: 'client_credentials',
+                    scope: 'write'
+                })
+            });
+            let cli_auth_res = await res.json();
+            client_token = cli_auth_res.access_token.token;
+        }catch(error){
+            console.log(error);
         }
-        signIn(foundUser);
+     
+        try{
+            const response = await fetch('http://localhost:4040/v2/auth/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${client_token}`
+                },
+                body: qs.stringify({
+                    username: username,
+                    password: password
+                })
+            });
+            let json = await response.json();
+    
+            if(response.status == 200){
+                signIn(username, json.token);
+            }
+
+            if(response.status == 401){
+                Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+                    {text:'okay'}
+                ]);
+                return;
+            }
+        }catch(error){
+            console.log(error);
+        }
     }
 
     return(
@@ -104,7 +139,7 @@ const SignInScreen = ({navigation}) => {
                 style={styles.footer}
             >
                 {/* Username section */}
-                <Text style={styles.text_footer}>Email or @username</Text>
+                <Text style={styles.text_footer}>Username</Text>
                 <View style={styles.action}>
                     <FontAwesome
                         name="user-o"
@@ -113,7 +148,7 @@ const SignInScreen = ({navigation}) => {
                         style={{marginTop:5}}
                     />
                     <TextInput
-                        placeholder="Your Email or username"
+                        placeholder="Your username"
                         style={styles.textInput}
                         autoCapitalize="none"
                         onChangeText={(val) => textInputChange(val)}
@@ -179,7 +214,7 @@ const SignInScreen = ({navigation}) => {
                 }
 
                {/* forget password section  */}
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{Alert.alert("not implement yet");}}>
                      <Text style={{color: 'grey', marginTop:15}}>Forgot password?</Text>
                 </TouchableOpacity>
                 
