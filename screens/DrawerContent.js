@@ -13,6 +13,29 @@ export function DrawerContent(props){
 
     const { signOut } = React.useContext(AuthContext);
 
+    const [username, setUsername] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    React.useEffect(() => {
+      const fetchProfile = async () => {
+        try{
+          const response = await fetch('http://localhost:4040/v2/user/me', {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Bearer 9qS0G91prA5APk1N8mzLIbXfqB4idhe53PhaoATDz6EnivOpT3ZqKDnLisXqLviajC4ORs0lJus9ph7tibFKZYI7rZsYAl6WXIgx1ycpjhkPBhl9Z9c93joWFS6weP4e'
+          }
+        });
+          let json = await response.json();
+          setUsername(json.username);
+          setEmail(json.email);
+        }catch(error) {
+          console.error(error);
+        } 
+      };
+      fetchProfile();
+    }, []);
+
     return(
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props}>
@@ -22,21 +45,21 @@ export function DrawerContent(props){
                     <View style={styles.userInfoSection}>
                         <View style={{flexDirection:'row', marginTop:15}}>
                             <Avatar.Image
-                                source={require('../assets/favicon.png')}
+                                source={require('../assets/avatar.png')}
                                 size={50}
                             />
                             <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Title style={styles.title}>Coco Zhang</Title>
-                                <Caption style={styles.caption}>@cocozhang</Caption>
+                                <Title style={styles.title}>{username}</Title>
+                                <Caption style={styles.caption}>{email}</Caption>
                             </View>
                         </View>
                         <View style={styles.row}>
                             <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>80</Paragraph>
+                                <Paragraph style={[styles.paragraph, styles.caption]}>302</Paragraph>
                                 <Caption style={styles.caption}>Following</Caption>
                             </View>
                             <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>100</Paragraph>
+                                <Paragraph style={[styles.paragraph, styles.caption]}>45844</Paragraph>
                                 <Caption style={styles.caption}>Follower</Caption>
                             </View>
                         </View>

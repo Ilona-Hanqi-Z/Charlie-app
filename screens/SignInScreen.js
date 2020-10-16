@@ -8,6 +8,8 @@ import Feather from 'react-native-vector-icons/Feather';
 import {AuthContext} from '../components/context';
 import {Users} from '../model/users';
 
+var qs = require('qs');
+
 const SignInScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({
@@ -67,11 +69,10 @@ const SignInScreen = ({navigation}) => {
     }
 
     // determine whether username and password is valid; actually do the sign in
-    const loginHandle = (username, password) => {
-        const foundUser = Users.filter(item => {
-            return username === item.username && password === item.password;
-        });
-
+    const loginHandle = async(username, password) => {
+        // const foundUser = Users.filter(item => {
+        //     return username === item.username && password === item.password;
+        // });
         if(username.length === 0 || password.length === 0){
             Alert.alert('Invalid User!', 'Username or password field cannot be empty', [
                 {text:'okay'}
@@ -79,13 +80,34 @@ const SignInScreen = ({navigation}) => {
             return;
         }
 
-        if(foundUser.length === 0){
+        try{
+            const response = await fetch('http://localhost:4040/v2/auth/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': 'Bearer G0jz1XRbq5FbjWSWJfBB9MkIi6jphORS5iOpvpdD6fAdawkS7qZwTRPk86BXeM8hfn1l7Qws4u80Gu8Psih6SvuUtGIDuJxZj47Xy4rbaZ98qc6icglknPvkZfG1Ix9X'
+                },
+                body: qs.stringify({
+                    username: username,
+                    password: password
+                })
+            });
+            console.log(response);
+            console.log(response.json);
+            signIn(username, "usertoken");
+        }catch(error){
             Alert.alert('Invalid User!', 'Username or password is incorrect.', [
                 {text:'okay'}
             ]);
             return;
         }
-        signIn(foundUser);
+
+        // if(foundUser.length === 0){
+        //     Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+        //         {text:'okay'}
+        //     ]);
+        //     return;
+        // }
     }
 
     return(
