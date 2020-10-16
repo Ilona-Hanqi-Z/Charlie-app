@@ -1,14 +1,43 @@
 /* This file contains the home page. */
+import React,{ Component} from 'react';
+import { StyleSheet} from 'react-native';
+import PostScreen from './PostScreen';
 
-import React from 'react';
-import { Text, View, Button } from 'react-native';
 
-function HomeScreen({navigation}) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-      </View>
-    );
+
+
+export async function getPosts() {
+    try{
+      let posts =  await fetch('https://yts.mx/api/v2/list_movies.json?quality=3D');
+      let result = await posts.json();
+      posts = null;
+
+      return result.data.movies;
+    }
+    catch(err) {
+      throw err;
+    }
+    
+      
+
+      
 }
 
-export default HomeScreen;
+
+
+export default class HomeScreen extends Component{
+
+  
+    render(){
+    return (
+      <PostScreen/>
+    );
+    }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex :1,
+   
+  }
+});
