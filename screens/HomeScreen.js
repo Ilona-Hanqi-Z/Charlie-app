@@ -1,14 +1,20 @@
 /* This file contains the home page. */
 
-import React from 'react';
-import { Text, View, Button } from 'react-native';
+import React,{ Component} from 'react';
+import { StyleSheet} from 'react-native';
+import PostScreen from './PostScreen';
 
-function HomeScreen({navigation}) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-      </View>
-    );
+export default class HomeScreen extends Component{
+    render(){
+      return (
+        <PostScreen/>
+      );
+    }
 }
 
-export default HomeScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex :1,
+   
+  }
+});
