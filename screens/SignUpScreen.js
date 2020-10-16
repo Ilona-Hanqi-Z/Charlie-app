@@ -129,7 +129,8 @@ const SignUpScreen = ({navigation}) => {
     }
 
     const SignupHandle = async(email, username, password, confirm_password) => {
-    
+        let client_token;
+        
         if(password !== confirm_password){
             Alert.alert('Invalid password!', 'passwords do not match', [
                 {text:'okay'}
@@ -145,11 +146,29 @@ const SignUpScreen = ({navigation}) => {
             return;
         }else{
             try{
+                const res = await fetch('http://localhost:4040/v2/auth/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': 'Basic RmdncFprWEtpdXI0enpGV09oa1FKUmNEUXBzZzBnOGpnYmF6TFlOY0NmMlJmU3Vrb1l1dGsyd1NKTEZmOnRJOGE2azFvUnV3aTMyaG96WmZMbG9WbXlFemJwQXZTeFJuYzZlS3lpTFVTcTBlUDYxTkZUMDNXT0Fld1BjS1FFTmF5RTk4NnE2ZTJhakE5N085dnI1UHZuRzltM3dORzZER01rQ05XcHpLdGtEQnVZTDF3Qkw4TE9LN0VESkpXWVhsanp6eGNJNnBhU1VMRXZBdEk2WXZuZVFtbEJPWVNodnpoUjBJTUhsM3JvTU5pM3NLMk1NSUIzRUtEUU0='
+                    },
+                    body: qs.stringify({
+                        grant_type: 'client_credentials',
+                        scope: 'write'
+                    })
+                });
+                let cli_auth_res = await res.json();
+                client_token = cli_auth_res.access_token.token;
+            }catch(error){
+                console.log(error);
+            }
+
+            try{
                 await fetch('http://localhost:4040/v2/user/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': 'Bearer G0jz1XRbq5FbjWSWJfBB9MkIi6jphORS5iOpvpdD6fAdawkS7qZwTRPk86BXeM8hfn1l7Qws4u80Gu8Psih6SvuUtGIDuJxZj47Xy4rbaZ98qc6icglknPvkZfG1Ix9X'
+                        'Authorization': `Bearer ${client_token}`
                     },
                     body: qs.stringify({
                         email: email,
@@ -165,7 +184,7 @@ const SignUpScreen = ({navigation}) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Bearer G0jz1XRbq5FbjWSWJfBB9MkIi6jphORS5iOpvpdD6fAdawkS7qZwTRPk86BXeM8hfn1l7Qws4u80Gu8Psih6SvuUtGIDuJxZj47Xy4rbaZ98qc6icglknPvkZfG1Ix9X'
+                    'Authorization': `Bearer ${client_token}`
                 },
                 body: qs.stringify({
                     username: username,
