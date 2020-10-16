@@ -5,25 +5,48 @@ import {
     Button,
     Dimensions,
     StyleSheet,
+    TouchableOpacity,
     Image
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import {LinearGradient} from 'expo-linear-gradient';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const SplahScreen = () => {
+const SplahScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
-            <Text>SplahScreen</Text>
+           
             <View style={styles.header}>
-                <Image 
+                <Animatable.Image 
+                        animation="bounceIn"
+                      
                     source={require('../assets/fresco.png')}
                     style={styles.logo}
                     reesizeMode="stretch"
                     />
             </View>
-            <View style={styles.footer}>
-                <Text>Share Your Story With World!</Text>
-                <Text>Sign in with account</Text>
+            <Animatable.View style={styles.footer}
+                             animation="fadeInUpBig"
+            >
+                <Text style={styles.title}>Share Your Story With World!</Text>
+                <Text style={styles.text}>Sign in with account</Text>
+                <View style={styles.button}>
+                <TouchableOpacity onPress = {() => navigation.navigate('SignInScreen')}>
+                    <LinearGradient
+                        colors={['#ffc600','#ffe900']}
+                        style={styles.signIn}>
+                        <Text style={styles.textSign}>Get Started</Text>
+                        <MaterialIcons
+                        name="navigate-next"
+                        color="#fff"
+                        size={20}
+                        />
+                    </LinearGradient>
+                    
+                </TouchableOpacity>
+                </View>
                 
-            </View>
+            </Animatable.View>
         </View>
     );
 };
@@ -35,10 +58,9 @@ const height_logo = height*0.28;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#ffc600'
+      flex: 1, 
+      backgroundColor: '#ffc600'
     },
-    
     header: {
         flex: 2,
         justifyContent: 'center',
@@ -57,6 +79,11 @@ const styles = StyleSheet.create({
         height: height_logo
     },
     title: {
+        color: '#05375a',
+        fontSize: 30,
+        fontWeight: 'bold'
+    },
+    text: {
         color: 'grey',
         marginTop:5
     },
@@ -69,13 +96,11 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 50,
+        borderRadius: 20,
         flexDirection: 'row'
     },
     textSign: {
         color: 'white',
         fontWeight: 'bold'
     }
- 
-
-});
+  });
