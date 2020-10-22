@@ -24,7 +24,7 @@ export function DrawerContent(props){
       const fetchProfile = async () => {
         try{
           const usertoken = await AsyncStorage.getItem('userToken');
-          const response = await fetch('http://localhost:4040/v2/user/me', {
+          const response = await fetch('http://ec2-3-238-129-128.compute-1.amazonaws.com:4040/v2/user/me', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -173,7 +173,8 @@ export function DrawerContent(props){
 
 const styles = StyleSheet.create({
     drawerContent: {
-      flex: 1,
+      flex:1
+
     },
     userInfoSection: {
       paddingLeft: 20,

@@ -70,6 +70,7 @@ const SignInScreen = ({navigation}) => {
     // determine whether username and password is valid; actually do the sign in
     const loginHandle = async(username, password) => {
         let client_token;
+
         if(username.length === 0 || password.length === 0){
             Alert.alert('Invalid User!', 'Username or password field cannot be empty', [
                 {text:'okay'}
@@ -77,7 +78,7 @@ const SignInScreen = ({navigation}) => {
             return;
         }
         try{
-            const res = await fetch('http://localhost:4040/v2/auth/token', {
+            const res = await fetch('http://ec2-3-238-129-128.compute-1.amazonaws.com:4040/v2/auth/token', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -95,7 +96,7 @@ const SignInScreen = ({navigation}) => {
         }
      
         try{
-            const response = await fetch('http://localhost:4040/v2/auth/signin', {
+            const response = await fetch('http://ec2-3-238-129-128.compute-1.amazonaws.com:4040/v2/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

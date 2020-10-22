@@ -23,6 +23,7 @@ var qs = require('qs');
 const SignUpScreen = ({navigation}) => {
 
     const [availability, setAvailability] = React.useState("");
+    const [clienttoken, setClienttoken] = React.useState("");
     const [data, setData] = React.useState({
         email: '',
         username: '',
@@ -38,23 +39,27 @@ const SignUpScreen = ({navigation}) => {
     const { signUp } = React.useContext(AuthContext);
 
     React.useEffect(() => {
-        const fetchAvailability = async () => {
-          try{
-            const response = await fetch(`http://localhost:4040/v2/user/check?username=${data.username}`, {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization': 'Bearer G0jz1XRbq5FbjWSWJfBB9MkIi6jphORS5iOpvpdD6fAdawkS7qZwTRPk86BXeM8hfn1l7Qws4u80Gu8Psih6SvuUtGIDuJxZj47Xy4rbaZ98qc6icglknPvkZfG1Ix9X'
+
+        const fetchClienttoken = async () => {
+            try{
+                const res = await fetch('http://ec2-3-238-129-128.compute-1.amazonaws.com:4040/v2/auth/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': 'Basic RmdncFprWEtpdXI0enpGV09oa1FKUmNEUXBzZzBnOGpnYmF6TFlOY0NmMlJmU3Vrb1l1dGsyd1NKTEZmOnRJOGE2azFvUnV3aTMyaG96WmZMbG9WbXlFemJwQXZTeFJuYzZlS3lpTFVTcTBlUDYxTkZUMDNXT0Fld1BjS1FFTmF5RTk4NnE2ZTJhakE5N085dnI1UHZuRzltM3dORzZER01rQ05XcHpLdGtEQnVZTDF3Qkw4TE9LN0VESkpXWVhsanp6eGNJNnBhU1VMRXZBdEk2WXZuZVFtbEJPWVNodnpoUjBJTUhsM3JvTU5pM3NLMk1NSUIzRUtEUU0='
+                    },
+                    body: qs.stringify({
+                        grant_type: 'client_credentials',
+                        scope: 'write'
+                    })
+                });
+                let cli_auth_res = await res.json();
+                setClienttoken(cli_auth_res.access_token.token);
+            }catch(error){
+                console.log(error);
             }
-          });
-            let json = await response.json();
-            setAvailability(json.available);
-          }catch(error) {
-            console.error(error);
-          } 
-        };
-        fetchAvailability();
+        }
+        fetchClienttoken();
       });
 
     const textInputChange = (val) => {
@@ -128,9 +133,7 @@ const SignUpScreen = ({navigation}) => {
         });
     }
 
-    const SignupHandle = async(email, username, password, confirm_password) => {
-        let client_token;
-        
+    const SignupHandle = async(email, username, password, confirm_password) => {       
         if(password !== confirm_password){
             Alert.alert('Invalid password!', 'passwords do not match', [
                 {text:'okay'}
@@ -139,6 +142,21 @@ const SignUpScreen = ({navigation}) => {
         }
         
         // TODO: if available, then create the new user
+        try{
+            const response = await fetch(`http://ec2-3-238-129-128.compute-1.amazonaws.com:4040/v2/user/check?username=${data.username}`, {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': `Bearer ${clienttoken}`
+            }
+          });
+            let json = await response.json();
+            setAvailability(json.available);
+        }catch(error) {
+            console.error(error);
+        } 
+
         if(!availability){
             Alert.alert('Invalid username!', 'Username has been taken', [
                 {text:'okay'}
@@ -146,29 +164,11 @@ const SignUpScreen = ({navigation}) => {
             return;
         }else{
             try{
-                const res = await fetch('http://localhost:4040/v2/auth/token', {
+                await fetch('http://ec2-3-238-129-128.compute-1.amazonaws.com:4040/v2/user/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': 'Basic RmdncFprWEtpdXI0enpGV09oa1FKUmNEUXBzZzBnOGpnYmF6TFlOY0NmMlJmU3Vrb1l1dGsyd1NKTEZmOnRJOGE2azFvUnV3aTMyaG96WmZMbG9WbXlFemJwQXZTeFJuYzZlS3lpTFVTcTBlUDYxTkZUMDNXT0Fld1BjS1FFTmF5RTk4NnE2ZTJhakE5N085dnI1UHZuRzltM3dORzZER01rQ05XcHpLdGtEQnVZTDF3Qkw4TE9LN0VESkpXWVhsanp6eGNJNnBhU1VMRXZBdEk2WXZuZVFtbEJPWVNodnpoUjBJTUhsM3JvTU5pM3NLMk1NSUIzRUtEUU0='
-                    },
-                    body: qs.stringify({
-                        grant_type: 'client_credentials',
-                        scope: 'write'
-                    })
-                });
-                let cli_auth_res = await res.json();
-                client_token = cli_auth_res.access_token.token;
-            }catch(error){
-                console.log(error);
-            }
-
-            try{
-                await fetch('http://localhost:4040/v2/user/create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': `Bearer ${client_token}`
+                        'Authorization': `Bearer ${clienttoken}`
                     },
                     body: qs.stringify({
                         email: email,
@@ -180,11 +180,11 @@ const SignUpScreen = ({navigation}) => {
                 console.error(error);
             }
 
-            const response = await fetch('http://localhost:4040/v2/auth/signin', {
+            const response = await fetch('http://ec2-3-238-129-128.compute-1.amazonaws.com:4040/v2/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': `Bearer ${client_token}`
+                    'Authorization': `Bearer ${clienttoken}`
                 },
                 body: qs.stringify({
                     username: username,
