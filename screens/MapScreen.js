@@ -1,58 +1,74 @@
 /* This file contains the map assignment page. */
 
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 import { LocationAccuracy } from 'expo-location';
+import { Assignments } from '../model/assignment';
 
-function MapScreen() {
-    const [region, setRegion] = React.useState({
-        latitude: "",
-        longitude: "",
-        latitudeDelta: "",
-        longitudeDelta: "",
-    });
+class MapScreen extends React.Component {
+    constructor(props){
+      super(props);
 
-    React.useEffect(() => {
-      const getLocationAsync = async() => {
-        let { status } = await Permissions.askAsync(Permissions.LOCATION);
-        if(status !== 'granted'){
-          console.log('Permission to access location was denied.')
-        }
-  
-        let location = await Location.getCurrentPositionAsync({accuracy:LocationAccuracy.Highest});
-        console.log(location);
-        let region = {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-          latitudeDelta: 0.045,
-          longitudeDelta: 0.045
-        }
-  
-        this.setRegion({region: region});
+      this.state = {
+        region:null,
       }
-  
-      getLocationAsync();
-      
-    }, );
 
-    
+      this._getLocationAsync();
+    }
 
+    _getLocationAsync = async() => {
+      let { status } = await Permissions.askAsync(Permissions.LOCATION);
+      if(status !== 'granted'){
+        console.log('Permission to access location was denied.')
+      }
 
-    return (  
-      
+      let location = await Location.getCurrentPositionAsync({accuracy:LocationAccuracy.Highest});
+      let region = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.045,
+        longitudeDelta: 0.045
+      }; 
+
+      this.setState({region: region});
+    }
+
+    render(){
+      let markers = [];
+      for(let i = 0; i < Assignments.length; i++){
+        markers.push(
+          <Marker
+            key = {i}
+            coordinate={{
+              latitude:Assignments[i].latitude,
+              longitude:Assignments[i].longitude,
+            }}
+            icon={require('../assets/map_marker.png')}
+            title={Assignments[i].title}
+            description={Assignments[i].caption}
+          />
+        )
+      }
+      return (  
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        
         <MapView
-          style={styles.map}
-          initialRegion={region}
+          initialRegion={this.state.region}
           showsUserLocation={true}
           showsCompass={true}
           rotateEnabled={false}
-        />
+          style={styles.map}
+        >
+          { markers }
+
+        </MapView>
       </View>
     );
+   }
   }
 
 export default MapScreen;
