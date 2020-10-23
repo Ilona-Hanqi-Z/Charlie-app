@@ -1,9 +1,28 @@
 import React ,{Component } from 'react';
 import { View,StyleSheet,ActivityIndicator,Text} from 'react-native';
+<<<<<<< HEAD
 import {getPosts} from './HomeScreen';
 import ListItems from './ListItems';
 import {Container,Content,List} from 'native-base';
 
+=======
+// import {getPosts} from './HomeScreen';
+import ListItems from './ListItems';
+import {Container,Content,List} from 'native-base';
+
+async function getPosts() {
+    try{
+      let posts =  await fetch('https://yts.mx/api/v2/list_movies.json?quality=3D');
+      let result = await posts.json();
+      posts = null;
+
+      return result.data.movies;
+    }
+    catch(err) {
+      throw err;
+    }  
+}
+>>>>>>> 0ea5128beacb67ac1ff8829e34c818d9a7542a03
 
 export default class PostScreen extends Component   {
 
@@ -37,10 +56,17 @@ export default class PostScreen extends Component   {
         </View>
     ) : (
         <List 
+<<<<<<< HEAD
         dataArray={this.state.data}
         renderRow= {(item) => {
             return <ListItems data={item} />
         }}
+=======
+            dataArray={this.state.data}
+            renderRow= {(item) => {
+                return <ListItems data={item} />
+            }}
+>>>>>>> 0ea5128beacb67ac1ff8829e34c818d9a7542a03
         />
     )
     return (

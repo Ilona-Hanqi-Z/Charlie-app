@@ -3,6 +3,7 @@ import React,{ Component} from 'react';
 import { StyleSheet} from 'react-native';
 import PostScreen from './PostScreen';
 
+<<<<<<< HEAD
 
 
 
@@ -32,6 +33,17 @@ export default class HomeScreen extends Component{
     return (
       <PostScreen/>
     );
+=======
+import React,{ Component} from 'react';
+import { StyleSheet} from 'react-native';
+import PostScreen from './PostScreen';
+
+export default class HomeScreen extends Component{
+    render(){
+      return (
+        <PostScreen/>
+      );
+>>>>>>> 0ea5128beacb67ac1ff8829e34c818d9a7542a03
     }
 }
 

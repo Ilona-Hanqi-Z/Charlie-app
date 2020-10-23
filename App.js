@@ -13,7 +13,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const Drawer = createDrawerNavigator();
 
-
 export default function App() {
   // reducer function
   const initialLoginState = {
@@ -58,16 +57,14 @@ export default function App() {
 
   // sign in, sign out, sign up
   const authContext = React.useMemo(() => ({
-    signIn: async(foundUser) => {
-      const userToken = String(foundUser[0].userToken);
-      const userName = foundUser[0].username;
+    signIn: async(username, usertoken) => {
       try{
-        await AsyncStorage.setItem('userToken', userToken);
+        await AsyncStorage.setItem('userToken', usertoken);
       }catch(e){
         console.log(e);
       }
       
-      dispatch({type: 'LOGIN', id: userName, token: userToken});
+      dispatch({type: 'LOGIN', id: username, token: usertoken});
     },
     signOut: async() => {
       try{
@@ -77,8 +74,14 @@ export default function App() {
       }
       dispatch( {type: 'LOGOUT'});
     },
-    signUp: () => {
-      // TODO
+    signUp: async(username, usertoken) => {
+      try{
+        await AsyncStorage.setItem('userToken', usertoken);
+      }catch(e){
+        console.log(e);
+      }
+      
+      dispatch({type: 'REGISTER', id: username, token: usertoken});
     },
   }), []);
 
@@ -103,7 +106,7 @@ export default function App() {
       </View>
     );
   }
-  
+
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>

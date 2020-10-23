@@ -1,14 +1,19 @@
 /* This file contains the gallery page. */
 
-import React from 'react';
-import { Text, View} from 'react-native';
+import React,{ Component} from 'react';
+import { StyleSheet} from 'react-native';
+import PostScreen from './PostScreen';
 
-function NewsScreen({navigation}) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>News</Text>
-      </View>
-    );
+export default class NewsScreen extends Component{
+    render(){
+      return (
+        <PostScreen/>
+      );
+    }
 }
 
-export default NewsScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex :1,
+  }
+});

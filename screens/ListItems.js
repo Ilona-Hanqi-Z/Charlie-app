@@ -62,6 +62,7 @@ class ListItems extends Component{
                 <Left>
                     <Button transparent onPress ={this.LikedFunction}>
                         <FontAwesome name= {this.state.isLiked ? "heart": "heart-o"}/>
+<<<<<<< HEAD
                   <Text>{this.state.isLiked ? (this.state.likes+1) : this.state.likes }</Text>
                     </Button>
                     <Button transparent onPress ={this.RetweetedFunction}>
@@ -71,6 +72,20 @@ class ListItems extends Component{
                     <Button transparent>
                         <FontAwesome name="share"/>
                     </Button>
+=======
+                        <Text> {this.state.isLiked ? (this.state.likes+1) : this.state.likes }</Text>
+                    </Button>
+
+                    <Button transparent onPress ={this.RetweetedFunction}>
+                        <FontAwesome name="retweet"/>
+                        <Text> {this.state.retweet ? (this.state.retweets+1) : this.state.retweets }</Text>
+                    </Button>
+
+                    <Button transparent>
+                        <FontAwesome name="share"/>
+                    </Button>
+
+>>>>>>> 0ea5128beacb67ac1ff8829e34c818d9a7542a03
                     <Right>
                         <Button style={styles.readMore}>
                             <Text style ={{color:"blue"}}>READ MORE</Text>

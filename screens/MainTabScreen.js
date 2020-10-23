@@ -56,6 +56,11 @@ function ProfileStackScreen({navigation}){
             <Icon.Button name="ios-menu" size={25}
             backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
             </Icon.Button>
+        ),
+        headerRight: () => (
+            <Icon.Button name="ios-person-add" size={25}
+            backgroundColor="#ffc600" onPress={() => {navigation.openDrawer();}}>
+            </Icon.Button>
         )
         }} />
         </ProfileStack.Navigator>
