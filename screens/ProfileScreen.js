@@ -34,7 +34,7 @@ function ProfileScreen({navigation}) {
           setPost(json.photo_count + json.video_count);
         
         }catch(error) {
-          console.error(error);
+          console.log(error);
         } 
       };
       fetchProfile();

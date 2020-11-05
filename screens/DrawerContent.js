@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 export function DrawerContent(props){
 
     const { signOut } = React.useContext(AuthContext);
+    
 
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");

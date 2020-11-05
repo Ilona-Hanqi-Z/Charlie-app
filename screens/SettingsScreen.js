@@ -1,7 +1,7 @@
 /* This file contains the settings page. */
 
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Alert } from 'react-native';
 
 const SettingsScreen = () => {
     return (
@@ -9,7 +9,7 @@ const SettingsScreen = () => {
         <Text>Settings Screen</Text>
         <Button
           title="Click Here"
-          onPress={() => alert('Button Clicked!')}
+          onPress={() => Alert.alert('Button Clicked!')}
         />
       </View>
     );

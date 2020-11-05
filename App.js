@@ -10,6 +10,7 @@ import SupportScreen from './screens/SupportScreen';
 import RootStackScreen from './screens/RootStackScreen';
 import { AuthContext } from './components/context';
 import AsyncStorage from '@react-native-community/async-storage';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Drawer = createDrawerNavigator();
 
@@ -109,18 +110,20 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {loginState.userToken !== null ? (
-          <Drawer.Navigator drawerContent={props => <DrawerContent {...props}/>}>
-            <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
-            <Drawer.Screen name="SettingScreen" component={SettingsScreen} />
-            <Drawer.Screen name="SupportScreen" component={SupportScreen} />
-          </Drawer.Navigator> 
-        )
-        :
-          <RootStackScreen/>
-        }
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          {loginState.userToken !== null ? (
+            <Drawer.Navigator drawerContent={props => <DrawerContent {...props}/>}>
+              <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+              <Drawer.Screen name="SettingScreen" component={SettingsScreen} />
+              <Drawer.Screen name="SupportScreen" component={SupportScreen} />
+            </Drawer.Navigator> 
+          )
+          :
+            <RootStackScreen/>
+          }
+        </NavigationContainer>
+      </SafeAreaProvider>
     </AuthContext.Provider>
   );
 }

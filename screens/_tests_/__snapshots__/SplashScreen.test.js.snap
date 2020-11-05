@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders all inputs as expected 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffc600",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 2,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Image
+      forwardedRef={[Function]}
+      resizeMode="stretch"
+      source={1}
+      style={
+        Object {
+          "height": 373.52000000000004,
+          "transform": Array [
+            Object {
+              "translateY": 0,
+            },
+          ],
+          "width": 373.52000000000004,
+        }
+      }
+    />
+  </View>
+  <View
+    forwardedRef={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#f2f2ed",
+        "borderTopLeftRadius": 30,
+        "borderTopRightRadius": 30,
+        "flex": 1,
+        "opacity": 0,
+        "paddingHorizontal": 30,
+        "paddingVertical": 50,
+        "transform": Array [
+          Object {
+            "translateY": 500,
+          },
+        ],
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "fontSize": 30,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Stay connected with everyone!
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "grey",
+          "marginTop": 5,
+        }
+      }
+    >
+      Log In with account
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "marginTop": 30,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <ViewManagerAdapter_ExpoLinearGradient
+          proxiedProperties={
+            Object {
+              "colors": Array [
+                4280824123,
+                4282930273,
+              ],
+              "endPoint": undefined,
+              "locations": undefined,
+              "startPoint": undefined,
+            }
+          }
+          style={
+            Object {
+              "alignItems": "center",
+              "borderRadius": 30,
+              "flexDirection": "row",
+              "height": 60,
+              "justifyContent": "center",
+              "width": 150,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontWeight": "bold",
+              }
+            }
+          >
+            Get Started
+          </Text>
+          <Text />
+        </ViewManagerAdapter_ExpoLinearGradient>
+      </View>
+    </View>
+  </View>
+</View>
+`;

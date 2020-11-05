@@ -1,0 +1,694 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders all inputs as expected 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <AIRMap
+    handlePanDrag={false}
+    initialRegion={null}
+    onChange={[Function]}
+    onLayout={[Function]}
+    onMapReady={[Function]}
+    onMarkerPress={[Function]}
+    region={null}
+    rotateEnabled={false}
+    showsCompass={true}
+    showsUserLocation={true}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <AIRMapMarker
+      coordinate={
+        Object {
+          "latitude": undefined,
+          "longitude": undefined,
+        }
+      }
+      description="caption1"
+      icon="file://assets/full/path/to/directory/name.type"
+      onPress={[Function]}
+      stopPropagation={false}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+      title="test 1"
+    >
+      <AIRMapCallout
+        alphaHitTest={false}
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            undefined,
+          ]
+        }
+        tooltip={true}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "backgroundColor": "#fff",
+                "borderColor": "#ccc",
+                "borderRadius": 6,
+                "borderWidth": 0.5,
+                "flexDirection": "column",
+                "padding": 15,
+                "width": 150,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "marginBottom": 5,
+                }
+              }
+            >
+              1
+              . 
+              test 1
+            </Text>
+            <Text>
+              caption1
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#007a87",
+                "borderWidth": 16,
+                "marginTop": -0.5,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#fff",
+                "borderWidth": 16,
+                "marginTop": -32,
+              }
+            }
+          />
+        </View>
+      </AIRMapCallout>
+    </AIRMapMarker>
+    <AIRMapMarker
+      coordinate={
+        Object {
+          "latitude": undefined,
+          "longitude": undefined,
+        }
+      }
+      description="caption2"
+      icon="file://assets/full/path/to/directory/name.type"
+      onPress={[Function]}
+      stopPropagation={false}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+      title="test 2"
+    >
+      <AIRMapCallout
+        alphaHitTest={false}
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            undefined,
+          ]
+        }
+        tooltip={true}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "backgroundColor": "#fff",
+                "borderColor": "#ccc",
+                "borderRadius": 6,
+                "borderWidth": 0.5,
+                "flexDirection": "column",
+                "padding": 15,
+                "width": 150,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "marginBottom": 5,
+                }
+              }
+            >
+              2
+              . 
+              test 2
+            </Text>
+            <Text>
+              caption2
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#007a87",
+                "borderWidth": 16,
+                "marginTop": -0.5,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#fff",
+                "borderWidth": 16,
+                "marginTop": -32,
+              }
+            }
+          />
+        </View>
+      </AIRMapCallout>
+    </AIRMapMarker>
+    <AIRMapMarker
+      coordinate={
+        Object {
+          "latitude": undefined,
+          "longitude": undefined,
+        }
+      }
+      description="caption3"
+      icon="file://assets/full/path/to/directory/name.type"
+      onPress={[Function]}
+      stopPropagation={false}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+      title="test 3"
+    >
+      <AIRMapCallout
+        alphaHitTest={false}
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            undefined,
+          ]
+        }
+        tooltip={true}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "backgroundColor": "#fff",
+                "borderColor": "#ccc",
+                "borderRadius": 6,
+                "borderWidth": 0.5,
+                "flexDirection": "column",
+                "padding": 15,
+                "width": 150,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "marginBottom": 5,
+                }
+              }
+            >
+              3
+              . 
+              test 3
+            </Text>
+            <Text>
+              caption3
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#007a87",
+                "borderWidth": 16,
+                "marginTop": -0.5,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#fff",
+                "borderWidth": 16,
+                "marginTop": -32,
+              }
+            }
+          />
+        </View>
+      </AIRMapCallout>
+    </AIRMapMarker>
+    <AIRMapMarker
+      coordinate={
+        Object {
+          "latitude": undefined,
+          "longitude": undefined,
+        }
+      }
+      description="caption4"
+      icon="file://assets/full/path/to/directory/name.type"
+      onPress={[Function]}
+      stopPropagation={false}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+      title="test 4"
+    >
+      <AIRMapCallout
+        alphaHitTest={false}
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            undefined,
+          ]
+        }
+        tooltip={true}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "backgroundColor": "#fff",
+                "borderColor": "#ccc",
+                "borderRadius": 6,
+                "borderWidth": 0.5,
+                "flexDirection": "column",
+                "padding": 15,
+                "width": 150,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "marginBottom": 5,
+                }
+              }
+            >
+              4
+              . 
+              test 4
+            </Text>
+            <Text>
+              caption4
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#007a87",
+                "borderWidth": 16,
+                "marginTop": -0.5,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#fff",
+                "borderWidth": 16,
+                "marginTop": -32,
+              }
+            }
+          />
+        </View>
+      </AIRMapCallout>
+    </AIRMapMarker>
+    <AIRMapMarker
+      coordinate={
+        Object {
+          "latitude": undefined,
+          "longitude": undefined,
+        }
+      }
+      description="caption5"
+      icon="file://assets/full/path/to/directory/name.type"
+      onPress={[Function]}
+      stopPropagation={false}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+      title="test 5"
+    >
+      <AIRMapCallout
+        alphaHitTest={false}
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            undefined,
+          ]
+        }
+        tooltip={true}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "backgroundColor": "#fff",
+                "borderColor": "#ccc",
+                "borderRadius": 6,
+                "borderWidth": 0.5,
+                "flexDirection": "column",
+                "padding": 15,
+                "width": 150,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "marginBottom": 5,
+                }
+              }
+            >
+              5
+              . 
+              test 5
+            </Text>
+            <Text>
+              caption5
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#007a87",
+                "borderWidth": 16,
+                "marginTop": -0.5,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#fff",
+                "borderWidth": 16,
+                "marginTop": -32,
+              }
+            }
+          />
+        </View>
+      </AIRMapCallout>
+    </AIRMapMarker>
+    <AIRMapMarker
+      coordinate={
+        Object {
+          "latitude": undefined,
+          "longitude": undefined,
+        }
+      }
+      description="caption6"
+      icon="file://assets/full/path/to/directory/name.type"
+      onPress={[Function]}
+      stopPropagation={false}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+      title="test 6"
+    >
+      <AIRMapCallout
+        alphaHitTest={false}
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            undefined,
+          ]
+        }
+        tooltip={true}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "backgroundColor": "#fff",
+                "borderColor": "#ccc",
+                "borderRadius": 6,
+                "borderWidth": 0.5,
+                "flexDirection": "column",
+                "padding": 15,
+                "width": 150,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "marginBottom": 5,
+                }
+              }
+            >
+              6
+              . 
+              test 6
+            </Text>
+            <Text>
+              caption6
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#007a87",
+                "borderWidth": 16,
+                "marginTop": -0.5,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#fff",
+                "borderWidth": 16,
+                "marginTop": -32,
+              }
+            }
+          />
+        </View>
+      </AIRMapCallout>
+    </AIRMapMarker>
+    <AIRMapMarker
+      coordinate={
+        Object {
+          "latitude": undefined,
+          "longitude": undefined,
+        }
+      }
+      description="caption7"
+      icon="file://assets/full/path/to/directory/name.type"
+      onPress={[Function]}
+      stopPropagation={false}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+      title="test 7"
+    >
+      <AIRMapCallout
+        alphaHitTest={false}
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "position": "absolute",
+            },
+            undefined,
+          ]
+        }
+        tooltip={true}
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-start",
+                "backgroundColor": "#fff",
+                "borderColor": "#ccc",
+                "borderRadius": 6,
+                "borderWidth": 0.5,
+                "flexDirection": "column",
+                "padding": 15,
+                "width": 150,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "marginBottom": 5,
+                }
+              }
+            >
+              7
+              . 
+              test 7
+            </Text>
+            <Text>
+              caption7
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#007a87",
+                "borderWidth": 16,
+                "marginTop": -0.5,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderTopColor": "#fff",
+                "borderWidth": 16,
+                "marginTop": -32,
+              }
+            }
+          />
+        </View>
+      </AIRMapCallout>
+    </AIRMapMarker>
+  </AIRMap>
+</View>
+`;

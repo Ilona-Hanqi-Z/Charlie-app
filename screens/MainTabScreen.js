@@ -12,6 +12,7 @@ import MapScreen from './MapScreen';
 import CameraScreen from './CameraScreen';
 import NewsScreen from './NewsScreen';
 import ProfileScreen from './ProfileScreen';
+import { NavigationContainer } from '@react-navigation/native';
 
 // home, profile, and gallery will have the title tab
 const HomeStack = createStackNavigator();

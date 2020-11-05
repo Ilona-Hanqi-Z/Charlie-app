@@ -1,0 +1,252 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders all inputs as expected 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <RCTScrollView
+    showsVerticalScrollIndicator={false}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "marginTop": 20,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "borderRadius": 100,
+              "height": 200,
+              "overflow": "hidden",
+              "width": 200,
+            }
+          }
+        >
+          <Image
+            resizeMode="center"
+            source={
+              Object {
+                "uri": "",
+              }
+            }
+            style={
+              Object {
+                "flex": 1,
+                "height": undefined,
+                "width": undefined,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "marginTop": 16,
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#52575D",
+                "fontFamily": "HelveticaNeue",
+              },
+              Object {
+                "fontSize": 36,
+                "fontWeight": "200",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#52575D",
+                "fontFamily": "HelveticaNeue",
+              },
+              Object {
+                "color": "#AEB5BC",
+                "fontSize": 14,
+              },
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "flexDirection": "row",
+            "marginTop": 32,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#52575D",
+                  "fontFamily": "HelveticaNeue",
+                },
+                Object {
+                  "fontSize": 24,
+                },
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#52575D",
+                  "fontFamily": "HelveticaNeue",
+                },
+                Object {
+                  "color": "#AEB5BC",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "textTransform": "uppercase",
+                },
+              ]
+            }
+          >
+            Posts
+          </Text>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+              },
+              Object {
+                "borderColor": "#DFD8C8",
+                "borderLeftWidth": 1,
+                "borderRightWidth": 1,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#52575D",
+                  "fontFamily": "HelveticaNeue",
+                },
+                Object {
+                  "fontSize": 24,
+                },
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#52575D",
+                  "fontFamily": "HelveticaNeue",
+                },
+                Object {
+                  "color": "#AEB5BC",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "textTransform": "uppercase",
+                },
+              ]
+            }
+          >
+            Followers
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#52575D",
+                  "fontFamily": "HelveticaNeue",
+                },
+                Object {
+                  "fontSize": 24,
+                },
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#52575D",
+                  "fontFamily": "HelveticaNeue",
+                },
+                Object {
+                  "color": "#AEB5BC",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "textTransform": "uppercase",
+                },
+              ]
+            }
+          >
+            Following
+          </Text>
+        </View>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "marginTop": 50,
+              "textAlign": "center",
+            }
+          }
+        >
+          POSTS SHOULD BE HERE
+        </Text>
+      </View>
+    </View>
+  </RCTScrollView>
+</RCTSafeAreaView>
+`;
